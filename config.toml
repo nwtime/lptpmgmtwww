@@ -1,0 +1,85 @@
+baseURL = "https://REPLACEME.nwtime.org/"
+title = "REPLACEME Project"
+enableRobotsTXT = true
+
+[params.plugins]
+
+# JS Plugins
+  [[params.plugins.js]]
+  link = "plugins/bootstrap-5.1.3/js/bootstrap.bundle.min.js"
+
+contentDir = "content/en"
+defaultContentLanguage = "en"
+defaultContentLanguageInSubdir = false
+
+pygmentsCodeFences = true
+pygmentsUseClasses = false
+pygmentsUseClassic = false
+pygmentsStyle = "tango"
+
+[blackfriday]
+plainIDAnchors = true
+hrefTargetBlank = true
+angledQuotes = false
+latexDashes = true
+
+[imaging]
+resampleFilter = "CatmullRom"
+quality = 75
+anchor = "smart"
+
+[languages]
+[languages.en]
+contentDir = "content/en"
+title = "REPLACEME Project"
+languageName ="English"
+weight = 1
+
+##### needed for raw html in md files #####
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.highlight]
+      style = "tango"
+
+# Everything below this are Site Params
+
+[params]
+copyright = "Network Time Foundation"
+logo2 = "images/logo.png"
+github_repo = "https://github.com/REPLACEME"
+description = "REPLACEME"
+images = ["/images/featured.webp"]
+
+[params.links]
+[[params.links.user]]
+	name = "Mailing lists"
+	url = "REPLACEME"
+	icon = "/images/icons/envelope.svg"
+        desc = "Discussion and help from your fellow users"
+[[params.links.user]]
+	name ="LinkedIn"
+	url = "REPLACEME"
+	icon = "/images/icons/linkedin.svg"
+        desc = "Follow us on LinkedIn"
+
+[[menu.main]]
+    name = "About"
+    url = "/about/"
+    weight = 20
+ 
+[[menu.main]]
+    name = "Install"
+    url = "/install/"
+    weight = 30
+
+[[menu.main]]
+    name = "Getting Involved"
+    url = "/getting-involved/"
+    weight = 40
+
+[[menu.main]]
+    name = "Documentation"
+    url = "/documentation/"
+    weight = 50
