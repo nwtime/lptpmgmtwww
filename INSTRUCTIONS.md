@@ -4,6 +4,10 @@
 
 3. The project name in the header is defined in layouts/partials/header.html. Replace the REPLACEME string in this file with the project name.
 
-4. Update the README and replace capitalized strings with project-specific name, description, license, etc.
+4. Replace the REPLACEME strings in layouts/partials/head.html with project-specific Google Analytics and Clarity IDs.
 
-5. Once the site is deployed, delete this INSTRUCTIONS file from your project's repo.
+5. Update the README and replace capitalized strings with project-specific name, description, license, etc.
+
+6. Website content lives in subdirectories of /content/en/. Each menu item has its own subdirectory and an index file named _index.md (note the leading underscore). Additional files can be added to a subdirectory, including markdown files (end in .md), images, and downloadable files (such as .pdf).
+
+7. Once the site is deployed, delete this INSTRUCTIONS file from your project's repo.
