@@ -1,5 +1,5 @@
-baseURL = "https://REPLACEME.nwtime.org/"
-title = "REPLACEME Project"
+baseURL = "https://libptpmgmt.nwtime.org/"
+title = "libptpmgmt Project"
 enableRobotsTXT = true
 
 [params.plugins]
@@ -31,7 +31,7 @@ anchor = "smart"
 [languages]
 [languages.en]
 contentDir = "content/en"
-title = "REPLACEME Project"
+title = "libptpmgmt Project"
 languageName ="English"
 weight = 1
 
@@ -48,14 +48,14 @@ weight = 1
 [params]
 copyright = "Network Time Foundation"
 logo2 = "images/logo.png"
-github_repo = "https://github.com/REPLACEME"
-description = "REPLACEME"
+github_repo = "https://github.com/erezgeva/libptpmgmt"
+description = "GitHub repository"
 images = ["/images/featured.webp"]
 
 [params.links]
 [[params.links.user]]
-	name = "Mailing lists"
-	url = "REPLACEME"
+	name = "libpmc mailing list"
+	url = "https://sourceforge.net/p/libptpmgmt/mailman/libpmc-discuss/"
 	icon = "/images/icons/envelope.svg"
         desc = "Discussion and help from your fellow users"
 [[params.links.user]]
@@ -68,11 +68,6 @@ images = ["/images/featured.webp"]
     name = "About"
     url = "/about/"
     weight = 20
- 
-[[menu.main]]
-    name = "Install"
-    url = "/install/"
-    weight = 30
 
 [[menu.main]]
     name = "Getting Involved"
