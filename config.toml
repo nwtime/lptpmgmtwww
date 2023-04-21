@@ -58,23 +58,3 @@ images = ["/images/featured.webp"]
 	url = "https://sourceforge.net/p/libptpmgmt/mailman/libpmc-discuss/"
 	icon = "/images/icons/envelope.svg"
         desc = "Discussion and help from your fellow users"
-[[params.links.user]]
-	name ="LinkedIn"
-	url = "REPLACEME"
-	icon = "/images/icons/linkedin.svg"
-        desc = "Follow us on LinkedIn"
-
-[[menu.main]]
-    name = "About"
-    url = "/about/"
-    weight = 20
-
-[[menu.main]]
-    name = "Getting Involved"
-    url = "/getting-involved/"
-    weight = 40
-
-[[menu.main]]
-    name = "Documentation"
-    url = "/documentation/"
-    weight = 50
