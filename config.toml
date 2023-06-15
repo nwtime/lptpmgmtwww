@@ -58,3 +58,8 @@ images = ["/images/featured.webp"]
 	url = "https://sourceforge.net/p/libptpmgmt/mailman/libpmc-discuss/"
 	icon = "/images/icons/envelope.svg"
         desc = "Discussion and help from your fellow users"
+
+[[menu.main]]
+    name = "Documentation"
+    url = "/documentation/"
+    weight = 10
