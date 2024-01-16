@@ -31,9 +31,10 @@ description: "Documentation, README, FAQ, and documentation HOWTO for libptpmgmt
             <h5 class="card-title" style="text-align: center;">Developer Resources</a></h5>
 			  <ul>
 			    <li class="card-text"><a href="/documentation/faqs/">FAQs</a></li>
-			    <li class="card-text"><a href="/documentation/std_vectors">Use of use C++ <code>std::vector<T></code></a></li>
+				<li class="card-text"><a href="/documentation/build/">Quick Build Guide</a></li>
+			    <li class="card-text"><a href="/documentation/std_vectors">Use of C++ <code>std::vector<T></code></a></li>
 			    <li class="card-text"><a href="/documentation/howto_doc_code">Doxygen Guidelines</a></li>
-			  </ul><br>
+			  </ul>
               <div class="d-flex justify-content-between align-items-center">
 			</div>
           </div>
