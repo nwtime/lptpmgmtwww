@@ -52,13 +52,6 @@ github_repo = "https://github.com/erezgeva/libptpmgmt"
 description = "GitHub repository"
 images = ["/images/featured.webp"]
 
-[params.links]
-[[params.links.user]]
-	name = "libpmc mailing list"
-	url = "https://sourceforge.net/p/libptpmgmt/mailman/libpmc-discuss/"
-	icon = "/images/icons/envelope.svg"
-        desc = "Discussion and help from your fellow users"
-
 [[menu.main]]
     name = "Documentation"
     url = "/documentation/"
