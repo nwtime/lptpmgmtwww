@@ -16,4 +16,15 @@ Instructions We use Javadoc style only. We use the at-sign for commands.
 We use document block before the item we describe
 We use this style /** xxxxx */. The block is usually spread on multiple lines.</description></item><item><title>libptpmgmt Library to Communicate with IEEE 1558 PTP Clocks</title><link>https://libptpmgmt.nwtime.org/documentation/readme/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://libptpmgmt.nwtime.org/documentation/readme/</guid><description>libptpmgmt Library to Communicate with IEEE 1558 PTP Clocks Preface The library for PTP management client uses IEEE 1558 management messages to communicate with PTP entities over the network. We support get, set and command of all management TLVs that are described in IEEE 1588-2019. In addition, we support LinuxPTP specific implementation management TLVs.
 The library supports the three PTP network layers:
-UDP over IP version 4 UDP over IP version 6 PTP over Ethernet — we do not support VLAN tags In addition, we support using the Unix network and communicate with LinuxPTP ptp4l.</description></item></channel></rss>
+UDP over IP version 4 UDP over IP version 6 PTP over Ethernet — we do not support VLAN tags In addition, we support using the Unix network and communicate with LinuxPTP ptp4l.</description></item><item><title>Quick Build Guide</title><link>https://libptpmgmt.nwtime.org/documentation/build/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://libptpmgmt.nwtime.org/documentation/build/</guid><description>GNU build We use GNU build.
+autoconf
+./configure
+make
+configure The configure script support options.
+Some basic options come from autoconf and some are specific to our project.
+Use help to see more information:
+./configure --help
+Make file The make file has many targets and parameters.
+Use help to see more information:
+make help
+Linux distribution We provide libraries and wrapper libraries for scripting. You can generate packages for installation.</description></item></channel></rss>
