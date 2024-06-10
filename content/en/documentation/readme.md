@@ -39,9 +39,21 @@ The configuration file uses the [ptp4l](https://linuxptp.nwtime.org/documentatio
 
 #### Using C
 
-> This project does **NOT** support C directly.  
+The library is written in C++ and provides a C wrapper.
 
-Users that want to use the library with their C application, need to write a wrapping in C++ and combine it with their application.
+> A notice regarding memory: The classes wrappers provide a free callback which free any memory allocated by the wrapper itself. With one exception: the functions `ptpmgmt_json_msg2json` and `ptpmgmt_json_tlv2json` allocate string, which you need to free, in your application! You need to release any memory allocated on your application, as the library and the wrappers do not free them!
+
+As C does not provides namespaces, all global functions and global structures are prefixed with `ptpmgmt_` or `PTPMGMT_`.
+
+***
+
+#### C++ and C standards
+
+The libptpmgmt Library uses `C++11` with [POSIX](https://posix.opengroup.org/), [GNU](https://gcc.gnu.org/onlinedocs/gcc/C-Extensions.html) extensions and [Linux kernel headers](https://kernel.org/).
+
+The C wrapper use `C99`.
+
+We try our best to avoid conflicts with newer versions of C++ and C. But if you find a conflict, please notify us.
 
 ***
 
@@ -52,8 +64,8 @@ This project uses [SWIG](https://www.swig.org/) to generate wrapper to script la
   * Perl version 5
   * Python version 3
   * Lua versions 5.1, 5.2, 5.3, 5.4
-  * Ruby version 2
-  * PHP version 7
+  * Ruby version 2, 3
+  * PHP version 7, 8
   * Tcl version 8
   * Go version 1.14 and above
 
@@ -69,30 +81,32 @@ Some C++ syntax is ignored or renamed in various scripts. For example in PHP: `B
 
 Some C++ structure and functions use C++ standard vector `std::vector<>`. SWIG maps C++ standard vector to a class.  See `libptpmgmt.i` for the full list of the mapping classes.  
 
-All languages create the vector as a class object. In Python, Ruby, and Tcl the vector has the properties of a native list.  Lua uses `subst` of C++ standard vector methods.  Perl, PHP, and Go use class methods; see `PtpMgmtLib.pm` for Perl, `ptpmgmt.php` for php, and `ptpmgmt.go` for php, for these methods.
+All languages create the vector as a class object. In Python, Ruby, and Tcl the vector has the properties of a native list.  Lua uses subset of C++ standard vector methods.  Perl, PHP, and Go use class methods; see `PtpMgmtLib.pm` for Perl, `ptpmgmt.php` for php, and `ptpmgmt.go` for php, for these methods.
 
-`std_vectors.md` provides more information on vectors mapping and the [Doxygen documentation](https://erezgeva.github.io/libptpmgmt/) provides information per class.
+[`std_vectors.md`](/documentation/std_vectors/) provides more information on vectors mapping and the [Doxygen documentation](https://erezgeva.github.io/libptpmgmt/) provides information per class.
 
 ***
 
 #### Go wrapper
 
-Since Go is a compile language and not a "pure" script, the wrapper is used a bit differently. The wrapper is only required during development,  
- as the resulting application is a binary that does not require the Go wrapper, only the main library.  During development, you need the Go wrapper and the main library development headers, as the Go build checks compilation of the Go wrapper.  
+Since Go is a compile language and not a "pure" script, the wrapper is used a bit differently. The wrapper is only required during development, as the resulting application is a binary that does not require the Go wrapper, only the C++ library. During development, you need the Go wrapper and the C++ library development headers, as the Go build compiles the Go wrapper.   
 
-In addition add the `-lm -lptpmgmt` flags to the linking using the `CGO_LDFLAGS` environment, so Go will link your application with the main library.  
+In addition add the `-lm -lptpmgmt` flags to the linking using the `CGO_LDFLAGS` environment, so Go will link your application with the C++ library.  
+Pay attention that although Go uses static typing and checks the types in compilation, some C++ methods use variable arguments or share names for different methods. In this case, swig will use the `... interface{}` parameter and perform the type check in runtime; if types are wrong, the Go swig wrapper will issue an exception to your application in run-time.  
 
-Pay attention that although Go uses static typing and checks the types in compilation, some C++ methods use variable arguments or share names for different methods. In this case, swig will use the `... interface{}` parameter and perform the type check in runtime. If types are wrong, the Go swig wrapper will issue an exception to your application.  For example, `Binary.SetBin(position, value)` requires `position` to be `int64` and `value` to be `byte`.
+For example, `Binary.SetBin(position, value)` requires `position` to be `int64` and `value` to be `byte`.  
 
-Go uses methods for interface are using Pascal notation, so all class functions in the main library are converted to use first letter capital.  
+Go uses methods for interface which use Pascal notation, so all class functions in the C++ library are converted to use first letter capital.
 
 Go does not use constructors and destructors.  
 
 You need to use the `New'Class'` functions and release with `Delete'Class'`.  
 
-You can use the `defer` statment for the releasing, if the release is due to the same function.  
+You can use the `defer` statment for the releasing, if the release is due in the same function.  
 
-As Go does not provide destructors, `MessageBuilder` is not a class and it does not call `message.clearData()` once it is removed. You are advised to call `message.clearData()` once you build the message, and do not plan to further use the send TLV.
+As Go does not provide destructors, `MessageBuilder` is not a class and it does not call `message.clearData()` once it is removed. You are advised to call `message.clearData()` once you build the message, and do not plan any further use with the send TLV.
+
+> Note: as Go syntax is stricter, you may need to update your code with small fixes when you build with a newer version of the Go wrapper of the library. The C++ library does sustain backward compatible, yet Go wrapper does not and may break!
 
 ***
 
