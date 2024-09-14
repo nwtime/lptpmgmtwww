@@ -1,9 +1,9 @@
 ---
-title: Guide for using Doxygen
+title: Developer Guide for using Doxygen in our Project
 description: "Developer guidelines for using Doxygen to document the libptpmgmt library."
 ---
 
-# Guide for using Doxygen
+# Developer Guide for using Doxygen in our Project
 
 #### Preface
 
