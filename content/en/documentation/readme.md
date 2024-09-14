@@ -21,6 +21,9 @@ We also support parsing incoming signaling messages.
 
 Users can use Linux VLAN with all sockets.
 
+* [Project home page](https://libptpmgmt.nwtime.org/)
+* [Reporting bugs and issues](https://github.com/erezgeva/libptpmgmt/issues)
+
 ***
 
 #### libptpmgmt Library
@@ -51,7 +54,7 @@ As C does not provides namespaces, all global functions and global structures ar
 
 The libptpmgmt Library uses `C++11` with [POSIX](https://posix.opengroup.org/), [GNU](https://gcc.gnu.org/onlinedocs/gcc/C-Extensions.html) extensions and [Linux kernel headers](https://kernel.org/).
 
-The C wrapper use `C99`.
+The C wrapper uses `C11`.
 
 We try our best to avoid conflicts with newer versions of C++ and C. But if you find a conflict, please notify us.
 
@@ -83,7 +86,7 @@ Some C++ structure and functions use C++ standard vector `std::vector<>`. SWIG m
 
 All languages create the vector as a class object. In Python, Ruby, and Tcl the vector has the properties of a native list.  Lua uses subset of C++ standard vector methods.  Perl, PHP, and Go use class methods; see `PtpMgmtLib.pm` for Perl, `ptpmgmt.php` for php, and `ptpmgmt.go` for php, for these methods.
 
-[`std_vectors.md`](/documentation/std_vectors/) provides more information on vectors mapping and the [Doxygen documentation](https://erezgeva.github.io/libptpmgmt/) provides information per class.
+[C++ std::vector<> map in Scripts Languages](/documentation/std_vectors/) provides more information on vectors mapping and the [Doxygen documentation](https://erezgeva.github.io/libptpmgmt/) provides information per class.
 
 ***
 
@@ -104,9 +107,7 @@ You need to use the `New'Class'` functions and release with `Delete'Class'`.
 
 You can use the `defer` statment for the releasing, if the release is due in the same function.  
 
-As Go does not provide destructors, `MessageBuilder` is not a class and it does not call `message.clearData()` once it is removed. You are advised to call `message.clearData()` once you build the message, and do not plan any further use with the send TLV.
-
-> Note: as Go syntax is stricter, you may need to update your code with small fixes when you build with a newer version of the Go wrapper of the library. The C++ library does sustain backward compatible, yet Go wrapper does not and may break!
+> Note: as Go syntax is stricter, you may need to update your code with small fixes when you build with a newer version of the Go wrapper of the library. We do our best to retain backward compatible with the C++ library, but **NOT** with the Go wrapper, which may break!
 
 ***
 
@@ -123,8 +124,8 @@ As Go does not provide destructors, `MessageBuilder` is not a class and it does 
   * Management TLVs in `proc.h` - Structures that hold a PTP Management TLV data
   * Signalling TLVs in `sig.h` - Structures that hold a PTP Signalling TLV data
   * Library version in `ver.h`
-  * Managment TLVs `mngIds.h` - Enumerator for PTP Management TLVs
-  * PTP managment types `types.h` - Enumerators and structure to use with PTP Management messages
+  * Management TLVs `mngIds.h` - Enumerator for PTP Management TLVs
+  * PTP management types `types.h` - Enumerators and structure to use with PTP Management messages
   * Dispatcher and builder in `msgCall.h` - Classes which provide call-backs for specific Management TLVs
   * Dispatcher and builder base in `callDef.h` - Provide all call-backs which may be impleamented
   * Time convertion in `timeCvrt.h` - Constants to convert time to different units.
@@ -137,7 +138,7 @@ As Go does not provide destructors, `MessageBuilder` is not a class and it does 
 
 #### pmc and phc_ctl tools
 
-The project provides a clone of [LinuxPTP;s](https://linuxptp.nwtime.org/) [pmc](https://linuxptp.nwtime.org/documentation/pmc/) tool using the libptpmgmt library and [phc_ctl](https://linuxptp.nwtime.org/documentation/phc_ctl/) using the libptpmgmt library and python wrapper.
+The project provides a clone of [LinuxPTP's](https://linuxptp.nwtime.org/) [pmc](https://linuxptp.nwtime.org/documentation/pmc/) tool using the libptpmgmt library and [phc_ctl](https://linuxptp.nwtime.org/documentation/phc_ctl/) using the libptpmgmt library and python wrapper.
 
 ***
 
@@ -155,6 +156,19 @@ The project comes with packaging:
   * RPM packages for Red Hat based Linux systems.
   * Arch Linux packages.
   * Gentoo build recipe using ebuild.
+
+***
+
+#### More Documentation
+
+* [Build project documentation](/documentation/build/)
+* [C++ std::vector<> map in Scripts Languages](/documentation/std_vectors/)
+* [Frequently asked questions](/documentation/faqs/)
+* [Developer Guide for using Doxygen in our Project](/documentation/howto_doc_code/)
+* [Compatibility with LinuxPTP](/documentation/compatibility/)
+* Library API doxygen, can be generated using the `make` file or on [github](https://erezgeva.github.io/libptpmgmt/)
+
+***
 
 #### Licence
 
