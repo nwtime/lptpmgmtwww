@@ -13,7 +13,11 @@
 		<button class="btn btn-light btn-lg" type="button" aria-expanded="false"><a class="nav-item" style="text-decoration: none; text-transform: uppercase" href="{{ .URL | absURL }}">{{ .Name }}</a>
         </button>
       {{ end }}
-    </div>
+<!-- Donate button -->	
+	  
+	  <button class="btn btn-primary btn-lg" type="button"><a class="nav-item btn btn-primary btn-lg" style="text-decoration: none; text-transform: uppercase" href="/donate/">Donate</a>
+      </button>
+	</div>
   <!-- Incorporate Google search. -->
 {{ if hugo.IsProduction }}
 <script async src="https://cse.google.com/cse.js?cx=7474c4c5ca53f79ef"></script>
