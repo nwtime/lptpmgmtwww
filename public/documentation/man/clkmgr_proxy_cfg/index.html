@@ -1,0 +1,121 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=ROBOTS content="INDEX, FOLLOW"><link rel=canonical href=https://libptpmgmt.nwtime.org/documentation/man/clkmgr_proxy_cfg/><meta property="og:title" content="clkmgr_proxy_cfg: Clock Manager proxy service JSON configuration file"><meta property="og:description" content="The clkmgr_proxy_cfg configuration file is written in JSON format and defines how the Clock Manager proxy service should communicate with the other time synchronization services on the system."><meta property="og:type" content="article"><meta property="og:url" content="https://libptpmgmt.nwtime.org/documentation/man/clkmgr_proxy_cfg/"><meta property="og:image" content="https://libptpmgmt.nwtime.org/images/featured.webp"><meta property="article:section" content="documentation"><meta property="article:published_time" content="2025-06-08T00:00:00+00:00"><meta property="article:modified_time" content="2025-06-08T00:00:00+00:00"><meta property="og:site_name" content="libptpmgmt Project"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://libptpmgmt.nwtime.org/images/featured.webp"><meta name=twitter:title content="clkmgr_proxy_cfg: Clock Manager proxy service JSON configuration file"><meta name=twitter:description content="The clkmgr_proxy_cfg configuration file is written in JSON format and defines how the Clock Manager proxy service should communicate with the other time synchronization services on the system."><script>window.onload=demo;function demo(){document.getElementById("gsc-i-id1").setAttribute("placeholder","Search...")}</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-ZS2KYK96FM"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-ZS2KYK96FM',{anonymize_ip:!0})</script><script type=text/javascript>(function(a,e,b,f,g,c,d){a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},c=e.createElement(f),c.async=1,c.src="https://www.clarity.ms/tag/"+g,d=e.getElementsByTagName(f)[0],d.parentNode.insertBefore(c,d)})(window,document,"clarity","script","gq2gputi6e")</script><link rel=dns-prefetch href=//fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com/ crossorigin><link href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,400i,700,800,800i,900i&display=swap" rel=stylesheet><title>clkmgr_proxy_cfg: Clock Manager proxy service JSON configuration file</title><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="The clkmgr_proxy_cfg configuration file is written in JSON format and defines how the Clock Manager proxy service should communicate with the other time synchronization services on the system."><meta name=generator content="Hugo 0.83.1"><link rel=stylesheet href=/scss/nwtime.min.93fc7d6e8f38ebcac7e95116f6947ecc.css media=screen></head><body><nav class="navbar navbar-expand-lg navbar-light"><div class=container-fluid><div><a class=navbar-brand href=https://www.nwtime.org><img height=80 width=80 src=https://libptpmgmt.nwtime.org/images/logo.png alt></a>
+<a class=navbar-brand style=color:#1a79c0!important;font-size:18px;font-weight:700;margin-left:20px href=https://libptpmgmt.nwtime.org/>libptpmgmt Project</a></div><div><button class="btn btn-light btn-lg" type=button aria-expanded=false><a class=nav-item style=text-decoration:none;text-transform:uppercase href=https://libptpmgmt.nwtime.org/documentation/>Documentation</a></button>
+<button class="btn btn-primary btn-lg" type=button><a class="nav-item btn btn-primary btn-lg" style=text-decoration:none;text-transform:uppercase href=/donate/>Donate</a></button></div><script async src="https://cse.google.com/cse.js?cx=7474c4c5ca53f79ef"></script><div class=gcse-search></ul></div></nav><div class=header-border></div><section class="section pt-0 pb-auto"><div class=container><nav aria-label=breadcrumb class="d-none d-md-block d-print-none"><ol class="breadcrumb spb-1"><li class=breadcrumb-item><a href=https://libptpmgmt.nwtime.org/documentation/>Documentation</a></li><li class=breadcrumb-item><a href=https://libptpmgmt.nwtime.org/documentation/man/>Man pages</a></li><li class="breadcrumb-item active" aria-current=page><a href=https://libptpmgmt.nwtime.org/documentation/man/clkmgr_proxy_cfg/>clkmgr_proxy_cfg: Clock Manager proxy service JSON configuration file</a></li></ol></nav><h3 id=clkmgr_proxy_cfg-clock-manager-proxy-service-json-configuration-file>clkmgr_proxy_cfg: Clock Manager proxy service JSON configuration file</h3><h4 id=description>DESCRIPTION</h4><p><a href=/documentation/man/clkmgr_proxy/>clkmgr_proxy(8)</a> reads configuration data from this configuration file. It is written in JSON format and defines
+how the Clock Manager proxy service should communicate with the other time synchronization services on the system.</p><p>Clock Manager supports multiple time bases. A time base refers to a logical grouping of clocks that the Clock Manager manages as a unit. Typically,
+a time base consists of one <a href=https://linuxptp.nwtime.org/documentation/ptp4l/>ptp4l(8)</a> instance or one
+<a href=https://chrony-project.org/doc/4.8/chronyd.html>chronyd(8)</a> instance or both. For example, a time base can consist of both <code>ptp4l</code>(8) and
+<code>chronyd</code>(8): <code>ptp4l</code>(8) disciplines the PHC clock, which then serves as the reference clock for <code>chronyd</code>(8) to discipline the system clock.
+Generally, clock synchronization services are grouped in the same time base when they are synchronized to the same clock source. Each time base
+operates independently, providing flexibility in monitor time synchronization status for multiple clock sources within the same system.</p><blockquote><p><strong>Note:</strong> Only one <code>clkmgr_proxy</code>(8) instance can run on the system at a time. To manage multiple synchronization scenarios, configure multiple
+time bases within a single proxy instance rather than running multiple proxies.</p></blockquote><p>The configuration file contains a set of keywords, each representing a parameter or a group of parameters used to communicate with a time
+synchronization service. Each keyword defines a particular aspect of the proxy service&rsquo;s operation, such as the available time bases, their names,
+and the configuration parameters to communicate with the time synchronization services like <code>ptp4l</code>(8) and <code>chronyd</code>(8). By configuring the
+parameters the configuration file determines how the Clock Manager proxy service comunnicate with time synchronization services within each time
+base.</p><h4 id=parameters>PARAMETERS</h4><dl><dt><code><strong>timeBases</strong></code></dt><dd><p>JSON array of configuration JSON objects for each available time base.</p></dd><dt><code><strong>timeBaseName</strong></code></dt><dd><p>The <code>timeBaseName</code> parameter specified a unique name to each time base to distinguish between different time bases in the configuration. The
+<code>timeBaseName</code> must be specified within length of 64 octets. Note that a single UTF-8 character can be stored with multiple octets.</p></dd><dt><code><strong>ptp4l</strong></code></dt><dd><p>JSON object specifying configuration for using a <a href=https://linuxptp.nwtime.org/documentation/ptp4l/>ptp4l(8)</a> service. If omitted,
+<a href=/documentation/man/clkmgr_proxy/>clkmgr_proxy(8)</a> will not communicate with the <code>ptp4l</code>(8) in this time base. In case of using an empty JSON
+object, <code>clkmgr_proxy</code>(8) will use its default parameters. Please refer to <a href=https://linuxptp.nwtime.org/documentation/ptp4l/>ptp4l(8)</a> for the
+UDS address, domain number, and transport specific used by the <code>ptp4l</code>(8) service.</p></dd></dl><blockquote><p>Note: All omitted parameters under the <code>ptp4l</code> keyword follow <code>ptp4l</code>(8) defaults, except for <code>interfaceName</code>, which is mandatory and must be
+specified.</p></blockquote><p><code>interfaceName</code>: - The name of network interface.</p><ul><li>The <code>interfaceName</code> must be specified within length of 64 octects.</li></ul><p><code>udsAddr</code>: - The Unix Domain Socket address used for inter-process communication with <code>ptp4l</code>(8) service. To find the <code>udsAddr</code> for the <code>ptp4l</code>(8)
+service, look for the <code>uds_address</code> parameter in the <code>ptp4l</code>(8) configuration file. Refer to
+<a href=https://linuxptp.nwtime.org/documentation/ptp4l/>ptp4l(8)</a> for more information.</p><ul><li>Default parameter: <code>/var/run/ptp/ptp4l</code></li></ul><p><code>domainNumber</code>: - The PTP domain number.</p><ul><li>Default parameter: 0</li></ul><p><code>transportSpecific</code>: - Transport specific.</p><ul><li>Range: [0 .. 255]</li><li>Default parameter: 0</li></ul><dl><dt><code><strong>chrony</strong></code></dt><dd><p>JSON object specifying configuration for using a <a href=https://chrony-project.org/doc/4.8/chronyd.html>chronyd(8)</a> service. If omitted, <code>clkmgr_proxy</code>
+(8) will not communicate with the <code>chronyd</code>(8) in this time base. In case of using an empty JSON object, <code>clkmgr_proxy</code>(8) will use its default
+parameters. Please refer to <a href=https://chrony-project.org/doc/4.8/chronyd.html>chronyd(8)</a> for the UDS address used by the <code>chronyd</code>(8) service.</p></dd></dl><blockquote><p>Note: All omitted parameters under the <code>chrony</code> keyword, follow <code>chronyd</code>(8) defaults.</p></blockquote><p><code>udsAddr</code>: - The Unix Domain Socket address used for inter-process communication with <code>chronyd</code>(8) service. To find the <code>udsAddr</code> for the
+<code>chronyd</code>(8) service, look for the <code>bindcmdaddress</code> parameter in the <code>chronyd</code>(8) configuration file. Refer to
+<a href=https://chrony-project.org/doc/4.8/chronyd.html>chronyd(8)</a> for more information.</p><ul><li>Default parameter: <code>/var/run/chrony/chronyd.sock</code></li></ul><h4 id=examples>EXAMPLES</h4><p>Below are examples of JSON configuration files that refers to different scenarios.</p><ol><li>Single time base with single ptp4l instance</li></ol><p>In this scenario, the proxy service subscribes to ONLY one <code>ptp4l</code>(8) instance under a single time base. No <code>chronyd</code>(8) service is subscribed.
+Therefore, the time synchronization data is provided solely by the <code>ptp4l</code>(8) service. The JSON configuration file includes ONLY the <code>ptp4l</code>(8)
+object within the time base.</p><p><strong>JSON file content:</strong></p><pre><code>{  
+  &quot;timeBases&quot;: [  
+      {  
+          &quot;timeBaseName&quot;: &quot;Global Clock&quot;,  
+          &quot;ptp4l&quot;:  
+          {  
+              &quot;interfaceName&quot;: &quot;eth0&quot;,  
+              &quot;udsAddr&quot;: &quot;/var/run/ptp/ptp4l-domain-0&quot;,  
+              &quot;domainNumber&quot;: 0,  
+              &quot;transportSpecific&quot;: 1  
+          }  
+      }  
+  ]  
+}
+</code></pre><ol start=2><li><p>Single time base with single chrony instance</p><p>In this scenario, the proxy service subscribes to ONLY one <code>chronyd</code>(8) instance under a single time base. No <code>ptp4l</code>(8) service is subscribed.
+Therefore, the time synchronization data is provided solely by the <code>chronyd</code>(8) service. The JSON configuration file includes ONLY the <code>chronyd</code>(8)
+object within the time base.</p><p><strong>JSON file content:</strong></p><pre><code>{  
+ &quot;timeBases&quot;: [  
+     {  
+         &quot;timeBaseName&quot;: &quot;Global Clock&quot;,  
+         &quot;chrony&quot;:  
+         {  
+             &quot;udsAddr&quot;: &quot;/var/run/chrony/chronyd.sock&quot;  
+         }  
+     }  
+ ]  
+}
+</code></pre></li><li><p>Single time base with default value</p><p>In this scenario, the proxy service subscribes to one <code>ptp4l</code>(8) instance and one <code>chronyd</code>(8) instance, both grouped under a single time base.
+Therefore, the time synchronization data is provided by both the <code>ptp4l</code>(8) and <code>chronyd</code>(8) services. The JSON configuration file includes one
+<code>ptp4l</code>(8) and one <code>chronyd</code>(8) objects within the same time base. As the fields in the <code>ptp4l</code>(8) and <code>chronyd</code>(8) objects are omitted, default
+values will be assigned, except for <code>interfaceName</code> in <code>ptp4l</code>(8), which is mandatory and must be specified.</p><p><strong>JSON file content:</strong></p><pre><code>{  
+ &quot;timeBases&quot;: [  
+     {  
+         &quot;timeBaseName&quot;: &quot;Global Clock&quot;,  
+         &quot;ptp4l&quot;:  
+         {  
+             &quot;interfaceName&quot;: &quot;eth0&quot;  
+         },  
+         &quot;chrony&quot;: {}  
+     }  
+ ]  
+}
+</code></pre></li><li><p>Single time base with assigned values</p><p>In this scenario, the proxy service subscribes to one <code>ptp4l</code>(8) instance and one <code>chronyd</code>(8) instance, both grouped under a single time base.
+Therefore, the time synchronization data is provided by both the <code>ptp4l</code>(8) and <code>chronyd</code>(8) services. The JSON configuration file includes one
+<code>ptp4l</code>(8) and one <code>chronyd</code>(8) objects within the same time base.</p><p><strong>JSON file content:</strong></p><pre><code>{  
+ &quot;timeBases&quot;: [  
+     {  
+         &quot;timeBaseName&quot;: &quot;Global Clock&quot;,  
+         &quot;ptp4l&quot;:  
+         {  
+             &quot;interfaceName&quot;: &quot;eth0&quot;,  
+             &quot;udsAddr&quot;: &quot;/var/run/ptp/ptp4l&quot;,  
+             &quot;domainNumber&quot;: 0,  
+             &quot;transportSpecific&quot;: 1  
+         },  
+         &quot;chrony&quot;:  
+         {  
+             &quot;udsAddr&quot;: &quot;/var/run/chrony/chronyd.sock&quot;  
+         }  
+     }  
+ ]  
+}
+</code></pre></li><li><p>Multiple time bases</p><p>In this scenario, the proxy service subscribes to multiple <code>ptp4l</code>(8) instance and one <code>chronyd</code>(8) instance. Each <code>ptp4l</code>(8) instance is
+configured under its own time base, while the <code>chronyd</code>(8) instance is grouped with one of the time bases. Therefore, the time synchronization
+data is provided by the <code>ptp4l</code>(8) and <code>chronyd</code>(8) service in respective time base. The JSON configuration file includes multiple time bases,
+each with its own <code>ptp4l</code>(8) configuration, and one of them also includes the <code>chronyd</code>(8) configuration.</p><p><strong>JSON file content:</strong></p><pre><code>{  
+ &quot;timeBases&quot;: [  
+     {  
+         &quot;timeBaseName&quot;: &quot;Global Clock&quot;,  
+         &quot;ptp4l&quot;:  
+         {  
+             &quot;interfaceName&quot;: &quot;eth0&quot;,  
+             &quot;udsAddr&quot;: &quot;/var/run/ptp/ptp4l&quot;,  
+             &quot;domainNumber&quot;: 0,  
+             &quot;transportSpecific&quot;: 1  
+         },  
+         &quot;chrony&quot;:  
+         {  
+             &quot;udsAddr&quot;: &quot;/var/run/chrony/chronyd.sock&quot;  
+         }  
+     },  
+     {  
+         &quot;timeBaseName&quot;: &quot;Working Clock&quot;,  
+         &quot;ptp4l&quot;:  
+         {  
+             &quot;interfaceName&quot;: &quot;eth1&quot;,  
+             &quot;udsAddr&quot;: &quot;/var/run/ptp/ptp4l-domain-20&quot;,  
+             &quot;domainNumber&quot;: 20,  
+             &quot;transportSpecific&quot;: 1  
+         }  
+     }  
+ ]  
+}
+</code></pre></li></ol><h4 id=files>FILES</h4><dl><dt><code>/etc/clkmgr/proxy_cfg.json</code></dt><dd><p>This is the JSON configuration file used by <code>clkmgr_proxy</code>(8).</p></dd></dl><h4 id=see-also>SEE ALSO</h4><p><a href=/documentation/man/clkmgr_proxy/>clkmgr_proxy(8)</a>, <a href=https://linuxptp.nwtime.org/documentation/ptp4l/>ptp4l(8)</a>,
+<a href=https://chrony-project.org/doc/4.8/chronyd.html>chronyd(8)</a></p></div></section><nav class="site-footer navbar navbar-expand-sm mt-auto"><div class=container><ul class=navbar-nav></ul><ul class="mx-auto pt-3"><p>&copy; 2025 <a class="navbar-text text-white" href=https://www.nwtime.org>Network Time Foundation</a></p></ul></div></nav></body></html>
