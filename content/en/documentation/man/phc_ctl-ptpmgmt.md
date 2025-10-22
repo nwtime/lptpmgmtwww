@@ -1,7 +1,7 @@
 ---
 title: "phc_ctl-ptpmgmt(8): directly control PHC device clock"
 description: "Linux PTP man page for directly controlling a master PTP hardware clock."
-date: 2020-06-15 
+date: 2025-09-12 
 ---
 
 ### phc_ctl-ptpmgmt: directly control PHC device clock
@@ -17,6 +17,10 @@ date: 2020-06-15
 <code>\<device></code> may be either `CLOCK_REALTIME`, any `/dev/ptpX` device, or any ethernet device which supports `ethtool`'s `get_ts_info` ioctl.
 
 #### OPTIONS
+
+<code>**-q**</code>
+
+: For backward compatible. This tool do not use the system logger.
 
 <code>**-h**</code>
 
@@ -56,6 +60,10 @@ date: 2020-06-15
 <code>**caps**</code>
 
 : Display the device capabilities. This is the default command if no commands are provided.
+
+<code>**pins**</code>
+
+: Display the device configurable pins descriptions.
 
 <code>**wait _seconds_**</code>
 
