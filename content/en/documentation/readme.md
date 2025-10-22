@@ -1,6 +1,7 @@
 ---
 title: libptpmgmt Library to Communicate with IEEE 1558 PTP Clocks
 description: "README for the libptpmgmt library."
+date: 2025-09-12 
 ---
 
 # libptpmgmt Library to Communicate with IEEE 1558 PTP Clocks
@@ -44,7 +45,8 @@ The configuration file uses the [ptp4l](https://linuxptp.nwtime.org/documentatio
 
 The library is written in C++ and provides a C wrapper.
 
-> A notice regarding memory: The classes wrappers provide a free callback which free any memory allocated by the wrapper itself. With one exception: the functions `ptpmgmt_json_msg2json` and `ptpmgmt_json_tlv2json` allocate string, which you need to free, in your application! You need to release any memory allocated on your application, as the library and the wrappers do not free them!
+> A notice regarding memory: The classes wrappers provide a free callback which free any memory allocated by the wrapper itself. 
+You need to release any memory allocated on your application, as the library and the wrappers do not free them!
 
 As C does not provides namespaces, all global functions and global structures are prefixed with `ptpmgmt_` or `PTPMGMT_`.
 
@@ -121,8 +123,8 @@ You can use the `defer` statment for the releasing, if the release is due in the
   * PtpClock in `ptp.h` - Provide a PTP dynamic clock ID
   * sockets classes in `sock.h `- Provide access to UPD IPv4, IPv6, and L2 PTP networks
   * SockUnix in `sock.h` - Socket to communicate with local LinuxPTP daemon
-  * Management TLVs in `proc.h` - Structures that hold a PTP Management TLV data
-  * Signalling TLVs in `sig.h` - Structures that hold a PTP Signalling TLV data
+  * Management TLVs in `mngTlvs.h` - Structures that hold a PTP Management TLV data
+  * Signalling TLVs in `sigTlvs.h` - Structures that hold a PTP Signalling TLV data
   * Library version in `ver.h`
   * Management TLVs `mngIds.h` - Enumerator for PTP Management TLVs
   * PTP management types `types.h` - Enumerators and structure to use with PTP Management messages
@@ -133,6 +135,15 @@ You can use the `defer` statment for the releasing, if the release is due in the
   * msg2json in `json.h` - Convert message to json text
   * Options in `opt.h` - Parse `pmc` tool command line parameters
   * Init in `init.h` - Initialize objects for `pmc` tool
+
+***
+
+#### Clock Manager
+
+Leveraging the libptpmgmt Library, the Clock Manager is a framework for monitoring network time synchronization on the local platform. The Clock 
+Manager exposes an API to enable reporting time synchronization status to any application executing on the system. It is planned that Clock Manager 
+will not only be able to report timing telemetry information, but also configure the platform. For further information, see the 
+[Clock Manager introduction](/documentation/clock_manager_introduction/).
 
 ***
 

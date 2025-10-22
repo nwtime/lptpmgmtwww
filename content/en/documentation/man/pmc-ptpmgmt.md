@@ -1,7 +1,7 @@
 ---
 title: "pmc(8): PTP management client"
 description: "Linux PTP man page for the PTP management client."
-date: 2024-06-04 
+date: 2025-09-11 
 ---
 
 ### pmc-ptpmgmt: PTP management client
@@ -62,11 +62,12 @@ Select the UDP IPv4 network transport. This is the default transport.
 
 <code>**-i _interface_**</code>
 
-: Specify the network interface. The default for Unix Domain Sockets is `/var/run/pmc.$pid` for root user and `/var/run/user/$uid/pmc.$pid` for other users.
+: Specify the network interface. The default for Unix Domain Sockets is `/var/run/pmc.$pid` for root user and `/var/run/user/$uid/pmc.$pid` for 
+other users.
 
 <code>**-s _uds-address_**</code>
 
-: Specifies the address of the server's UNIX domain socket. The default is `/var/run/ptp4l`.
+: Specifies the address of the server's UNIX domain socket. The default is `/var/run/ptp/ptp4l`.
 
 <code>**-t _transport-specific-field_**</code>
 
@@ -82,11 +83,14 @@ Select the UDP IPv4 network transport. This is the default transport.
 
 <code>**-z**</code>
 
-: The official interpretation of the 1588 standard mandates sending `GET` actions with valid (but meaningless) `TLV` values. Therefore the `pmc` program normally sends `GET` requests with properly formed `TLV` values. This option enables the legacy option of sending zero length `TLV` values instead.
+: The official interpretation of the 1588 standard mandates sending `GET` actions with valid (but meaningless) `TLV` values. Therefore the `pmc` 
+program normally sends `GET` requests with properly formed `TLV` values. This option enables the legacy option of sending zero length `TLV` values 
+instead.
 
 #### LONG OPTIONS
 
-Each and every configuration file option (see below in sections [PROGRAM OPTIONS](#program-options) and [PORT OPTIONS](#port-options)) may also appear as a "long" style command line argument. For example, the `transportSpecific` option may be set using either of these two forms:
+Each and every configuration file option (see below in sections [PROGRAM OPTIONS](#program-options) and [PORT OPTIONS](#port-options)) may also 
+appear as a "long" style command line argument. For example, the `transportSpecific` option may be set using either of these two forms:
 
 `--transportSpecific 1`
 
@@ -96,9 +100,12 @@ Option values given on the command line override values in the global section of
 
 #### CONFIGURATION FILE
 
-The configuration file is divided into sections. Each section starts with a line containing its name enclosed in brackets and it follows with settings. Each setting is placed on a separate line, it contains the name of the option and the value separated by whitespace characters. Empty lines and lines starting with `#` are ignored.
+The configuration file is divided into sections. Each section starts with a line containing its name enclosed in brackets and it follows with 
+settings. Each setting is placed on a separate line, it contains the name of the option and the value separated by whitespace characters. Empty 
+lines and lines starting with `#` are ignored.
 
-The global section (indicated as `[global]`) sets the global program options as well as the default port specific options. Other sections are port specific sections and they override the default port options. The name of the section is the name of the configured port (e.g. `[enp0s25]`).
+The global section (indicated as `[global]`) sets the global program options as well as the default port specific options. Other sections are port 
+specific sections and they override the default port options. The name of the section is the name of the configured port (e.g. `[enp0s25]`).
 
 #### PROGRAM OPTIONS
 
@@ -109,15 +116,21 @@ The global section (indicated as `[global]`) sets the global program options as 
 <code>**sa_file**</code>
 
 : Specifies the location of the file containing Security Associations used for immediate security processing of the Authentication TLV in
-support of the optional security mechanism defined in ieee1588-2019 ch 14.16. See [SECURITY ASSOCIATION OPTIONS in ptp4l(8)](https://linuxptp.nwtime.org/documentation/ptp4l/#security-association-options) for information on how this file should be formatted. `spp` and `active_key_id` should be specifed for each port to indicate which Security Association from the `sa_file` should be used. The default is an empty string.
+support of the optional security mechanism defined in ieee1588-2019 ch 14.16. See [SECURITY ASSOCIATION OPTIONS in 
+ptp4l(8)](https://linuxptp.nwtime.org/documentation/ptp4l/#security-association-options) for information on how this file should be formatted. 
+`spp` and `active_key_id` should be specifed for each port to indicate which Security Association from the `sa_file` should be used. The default is 
+an empty string.
 
 <code>**socket_priority**</code>
 
-: Configure the `SO_PRIORITY` of sockets. This is to support cases where a user wants to route pmc traffic using Linux `qdiscs` for the purpose of traffic shaping. This option is only available with the IEEE 802.3 transport (the `-2` option) and is silently ignored when using the UDP IPv4/6 network transports. Must be in the range of 0 to 15, inclusive. The default is 0.
+: Configure the `SO_PRIORITY` of sockets. This is to support cases where a user wants to route pmc traffic using Linux `qdiscs` for the purpose of 
+traffic shaping. This option is only available with the IEEE 802.3 transport (the `-2` option) and is silently ignored when using the UDP IPv4/6 
+network transports. Must be in the range of 0 to 15, inclusive. The default is 0.
 
 <code>**udp6_scope**</code>
 
-: Specifies the desired scope for the IPv6 multicast messages. This will be used as the second byte of the primary address. This option is only relevant with IPv6 transport. See [RFC 4291](https://datatracker.ietf.org/doc/html/rfc4291). The default is 0x0E for the global scope.
+: Specifies the desired scope for the IPv6 multicast messages. This will be used as the second byte of the primary address. This option is only 
+relevant with IPv6 transport. See [RFC 4291](https://datatracker.ietf.org/doc/html/rfc4291). The default is 0x0E for the global scope.
 
 <code>**uds_address**</code>
 
@@ -127,11 +140,14 @@ support of the optional security mechanism defined in ieee1588-2019 ch 14.16. Se
 
 <code>**active_key_id**</code>
 
-: Used in conjunction with `spp` and `sa_file` directives to specify which key from the `spp` defined Security Association should be used for outbound icv calculations. All Security Assocations are read from the file specified by `sa_file`. Requires `spp` and `sa_file` directives. Must be in the range of 1 to 2<sup>^32</sup>-1, inclusive. The default is 0 (disabled).
+: Used in conjunction with `spp` and `sa_file` directives to specify which key from the `spp` defined Security Association should be used for 
+outbound icv calculations. All Security Assocations are read from the file specified by `sa_file`. Requires `spp` and `sa_file` directives. Must be 
+in the range of 1 to 2<sup>^32</sup>-1, inclusive. The default is 0 (disabled).
 
 <code>**allow_unauth**</code>
 
-: Allows for `pmc` to accept unauthenticated management response and signaling messages when authentication is enabled and `spp`, `active_key_id` and `sa_file` are set. Possible values are:
+: Allows for `pmc` to accept unauthenticated management response and signaling messages when authentication is enabled and `spp`, `active_key_id` 
+and `sa_file` are set. Possible values are:
 
   `0`: normal receiving
   
@@ -147,7 +163,11 @@ The default is `0` (disabled).
 
 <code>**spp**</code>
 
-: Specifies the Security Parameters Pointer of the desired Security Association to be used for Authentication TLV support for a given port. Any port with an assigned spp will attach Authentication TLVs to all outbound messages and check for Authentication TLVs on all inbound messages in accordance to the corresponding security association sourced via the `sa_file` directive. Outbound Authentication TLVs are generated using the key specified by `active_key_id`. Not compatible with one step ports or advertised versions less then PTPv2.1. Requires `sa_file` and `active_key_id` directives. Must be in the range of 0 to 255, inclusive. The default is `-1` (disabled).
+: Specifies the Security Parameters Pointer of the desired Security Association to be used for Authentication TLV support for a given port. Any 
+port with an assigned spp will attach Authentication TLVs to all outbound messages and check for Authentication TLVs on all inbound messages in 
+accordance to the corresponding security association sourced via the `sa_file` directive. Outbound Authentication TLVs are generated using the key 
+specified by `active_key_id`. Not compatible with one step ports or advertised versions less then PTPv2.1. Requires `sa_file` and `active_key_id` 
+directives. Must be in the range of 0 to 255, inclusive. The default is `-1` (disabled).
 
 <code>**ptp_dst_mac**</code>
 
@@ -159,7 +179,8 @@ The default is `0` (disabled).
 
 <code>**udp_ttl**</code>
 
-: Specifies the Time to live (TTL) value for IPv4 multicast messages and the hop limit for IPv6 multicast messages. This option is only relevant with the IPv4 and IPv6 UDP transports. The default is 1 to restrict the messages sent by `ptp4l` to the same subnet.
+: Specifies the Time to live (TTL) value for IPv4 multicast messages and the hop limit for IPv6 multicast messages. This option is only relevant 
+with the IPv4 and IPv6 UDP transports. The default is 1 to restrict the messages sent by `ptp4l` to the same subnet.
 
 #### MANAGEMENT IDS
 
@@ -168,7 +189,9 @@ Though build of `GRANDMASTER_CLUSTER_TABLE`, `UNICAST_MASTER_TABLE`, and `ACCEPT
 
 #### WARNING
 
-Be cautious when the same configuration file is used for both `ptp4l` and `pmc`.  Keep in mind that values specified in the configuration file take precedence over their default values. If a certain option which is common to `ptp4l` and `pmc` is specified to a non-default value in the configuration file (e.g. for `ptp4l`), then this non-default value applies also for `pmc`. This might be not what is expected.
+Be cautious when the same configuration file is used for both `ptp4l` and `pmc`.  Keep in mind that values specified in the configuration file take 
+precedence over their default values. If a certain option which is common to `ptp4l` and `pmc` is specified to a non-default value in the 
+configuration file (e.g. for `ptp4l`), then this non-default value applies also for `pmc`. This might be not what is expected.
 
 To avoid securely this unexpected behaviour, different configuration files for `ptp4l` and `pmc` are recommended.
 
