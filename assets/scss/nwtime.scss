@@ -122,6 +122,7 @@ p code, li > code, table code, pre {
     border-color: #ffa82c;
     text-transform: uppercase;
     text-decoration: none;
+	margin-top: 20px;
 }
 
 /*----------  Search  ----------*/
@@ -157,6 +158,13 @@ display: none !important;
 padding: inherit !important;
 }
 
+.banner {
+  display: flex;
+  justify-content: center; /* Horizontal centering */
+  align-items: center;     /* Vertical centering */
+  height: 50vh;           /* Give the container height to see vertical centering */
+}
+
 /*---------- Blue border under header ----------*/
 .header-border {
     border-style: solid;
@@ -180,6 +188,15 @@ padding: inherit !important;
 
 .site-footer {
 	background: #1a79c0;
+	height: 140px;
+}
+
+.site-footer li, {
+    list-style-type: none;
+}
+
+.site-footer img, {
+    margin-right: 10px
 }
 
 .site-footer a,
