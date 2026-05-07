@@ -1,16 +1,23 @@
-<nav class="site-footer navbar navbar-expand-sm mt-auto">
-<div class="container">
-  <ul class="navbar-nav">
-    {{ range .Site.Params.links.user }}
-    <li class="nav-item" title="{{ .name }}" aria-label="{{ .name }}">
-      <a class="nav-link" target="_blank" rel="noopener noreferrer" href="{{ .url }}">
-        <img src="{{ .icon }}" width="20" height="20"></img>
-      </a>
-    </li>
-    {{ end }}
-	</ul>
-	<ul class="mx-auto pt-3">
-      <p>&copy; 2026 <a class="navbar-text text-white" href="https://www.nwtime.org/">Network Time Foundation</a></p>	
-  </ul>
-  </div>
+<nav class="navbar navbar-expand-lg">
+  <div class="container-fluid site-footer gx-5">
+    <div>
+	  <ul>
+      {{ range .Site.Params.links.user }}
+        <li class="nav-item" title="{{ .name }}" aria-label="{{ .name }}">
+          <a class="nav-link" target="_blank" rel="noopener noreferrer" href="{{ .url }}"> 
+          <img class="figure-img img-fluid" src="{{ .icon }}" width="20" height="20"></img>{{ .name }}
+          </a>
+        </li>
+      {{ end }}	
+	  </ul>
+	</div>
+	<div>
+	  <ul>
+	    <li><a class="navbar-text text-white" href="https://www.nwtime.org/">&copy; 2026 Network Time Foundation</a></li>
+        <li><a class="navbar-text text-white" href="https://www.nwtime.org/contact/">Contact Us</a></li>
+	    <li><a class="navbar-text text-white" href="https://www.nwtime.org/privacy-policy/">Privacy Policy</a></li>
+		<li><p class="navbar-text">EIN: 45-1739761</p></li>
+	  </ul>
+	</div>
+  </div>  
 </nav>
